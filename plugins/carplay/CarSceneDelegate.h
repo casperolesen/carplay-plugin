@@ -1,4 +1,3 @@
-// CarPlay specific
 #import <UIKit/UIKit.h>
 #import <CarPlay/CarPlay.h>
 

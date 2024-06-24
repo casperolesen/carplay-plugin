@@ -1,7 +1,4 @@
-// CarPlay specific
 #import <UIKit/UIKit.h>
-#import <CarPlay/CarPlay.h>
-
 
 @interface SceneDelegate : UIResponder <UIWindowSceneDelegate>
 

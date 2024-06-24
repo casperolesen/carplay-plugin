@@ -5,12 +5,12 @@
     }
 
     if (self.bridge == nil) {
-      self.bridge = [self createBridgeWithDelegate:self
-                                launchOptions:[self connectionOptionsToLaunchOptions:connectionOptions]];
+      RCTAppSetupPrepareApp([UIApplication sharedApplication], self.turboModuleEnabled);
+      self.rootViewFactory = [self createRCTRootViewFactory];
     }
 
     NSDictionary * initProps = [self prepareInitialProps];
-    self.rootView = [self  createRootViewWithBridge:self.bridge moduleName:self.moduleName initProps:initProps];
+    self.rootView = [self.rootViewFactory viewWithModuleName:self.moduleName initialProperties:initProps launchOptions:[self connectionOptionsToLaunchOptions:connectionOptions]];
 
     self.rootView.backgroundColor = [UIColor blackColor];
 

@@ -1,11 +1,6 @@
-// CarPlay specific
 #import "SceneDelegate.h"
 #import "AppDelegate.h"
-#import <React/RCTBundleURLProvider.h>
-#import <React/RCTRootView.h>
 #import <EXSplashScreen/EXSplashScreenService.h>
-#import <EXSplashScreen/EXSplashScreenService.h>
-
 
 @implementation SceneDelegate
 
@@ -19,8 +14,8 @@
     BOOL hasCreatedBridge = [appDelegate initAppFromScene:connectionOptions];
         
     // Create rootViewController
-    UIViewController * rootViewController = [[UIViewController alloc] init];
-    rootViewController.view = appDelegate.rootView;
+    UIViewController * rootViewController = appDelegate.createRootViewController;
+    [appDelegate setRootView:appDelegate.rootView toRootViewController:rootViewController];
 
 
     UIWindow* window = [[UIWindow alloc] initWithWindowScene: scene];
@@ -33,11 +28,9 @@
     [self.window makeKeyAndVisible];
 
     EXSplashScreenService *splashScreenService = (EXSplashScreenService *)[EXModuleRegistryProvider getSingletonModuleForClass:[EXSplashScreenService class]];
-    [splashScreenService showSplashScreenFor:rootViewController options:EXSplashScreenForceShow];
     
     [appDelegate finishedLaunchingWithOptions:connectionOptions];
     
-
     if(!hasCreatedBridge) {
       [splashScreenService hideSplashScreenFor:rootViewController options:EXSplashScreenDefault successCallback:^(BOOL hasEffect){}
                                failureCallback:^(NSString * _Nonnull message) {
